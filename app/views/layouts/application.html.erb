@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StackOverclone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+    <header>
+        <div id='user'>
+
+            <% if current_user %>
+            <p><%= current_user.username %> | <%= link_to 'Sign out', '/signout' %></p>
+            <% else %>
+            <p><%= link_to 'Sign in', '/signin' %> | <%= link_to 'Sign up', '/signup' %></p>
+            <% end %>
+        </div>
+    </header>
+
+    <% if flash[:alert] %>
+        <p id='alert'><%= flash[:alert] %></p>
+    <% end %>
+    <% if flash[:notice] %>
+        <p id='notice'><%= flash[:notice] %></p>
+    <% end %>
+
+    <main>
+        <%= yield %>
+    </main>
+    <footer>
+        <hr>
+        <p>© Jaime Gensler & Brett Cordell</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<p><%= @question.user_id || 'UH OH' %></p>
+
+<h1><%= current_user.permissions %></h1>
+
+
+<% if @question.answers.any? %>
+    <h4>Here are the answers for this question:</h4>
+
+    <ul>
+        <% @question.answers.each do |answer| %>
+            <li>
+                <%= link_to answer.name, question_answer_path(@question, answer) %>
+            </li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>No answers are listed for this question.</p>
+<% end %>
+
+<p><%= link_to "Add a answer", new_question_answer_path(@question) %></p>
+
+<p><%= link_to "Edit", edit_question_path(@question) %></p>
+<p><%= link_to "Delete question", question_path(@question),
+    :data => {
+        :confirm => "Are you sure?",
+        :method => "delete"}
+    %>
+</p>
+
+<p><%= link_to "Return to questions", questions_path %></p>
